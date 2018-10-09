@@ -2,7 +2,7 @@
 
 [ext_resource path="res://SudokuCell.gd" type="Script" id=1]
 
-[node name="SudokuCell" type="Label" index="0" groups=[
+[node name="SudokuCell" type="Label" groups=[
 "SudokuCells",
 ]]
 
