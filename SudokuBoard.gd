@@ -9,9 +9,12 @@ var SudokuCell = preload("res://SudokuCell.tscn")
 var cells = [] # Holds a list of all the cells in the grid
 var all_options = [] # Holds the valid input choices for the player (1-9 in a typical sudoku game)
 
+var recursion_history = []
+
 var next_button # Reference to the next button for debugging
 
 var difficulty = 0.5 # Indicates approximately how many tiles are removed, higher number removes more tiles
+
 
 func start():
 	# Called by the parent to start the game
@@ -45,6 +48,9 @@ func start():
 		# If somehow the cells could not be filled, print error message
 		# Need to handle this failure case better
 		print("failure")
+
+	# Show the user the steps of board filling
+	display_fill_steps()
 
 
 func initialise_cells():
@@ -112,7 +118,6 @@ func generate_all_neighbors():
 
 
 func fill_cells(remaining_cells):
-	#yield(next_button, "pressed") # Doesn't work as intended
 	# Recursive function to fill all cells with valid values
 	
 	# Pop the current_cell from the front of the stack to facilitate recursion
@@ -135,6 +140,8 @@ func fill_cells(remaining_cells):
 	# Set the value of the current cell to the first of the options
 	for value in options:
 		current_cell.set_value(value)
+		# Record the cell and value in the recursion history
+		recursion_history.append({"cell": current_cell, "value": current_cell.text})
 		
 		# Success case means that all the cells have been filled!
 		if remaining_cells.empty():
@@ -147,6 +154,9 @@ func fill_cells(remaining_cells):
 	# If all the options fail, then we have to backtrack
 	current_cell.remove_value()
 	remaining_cells.push_front(current_cell)
+	
+	# Record the backtracking in the history
+	recursion_history.append({"cell": current_cell, "value": current_cell.text})
 	
 	# We return false to cause the for loop on the previous cell to try the next value in the options[] array
 	return false
@@ -167,3 +177,19 @@ func shuffle_array(arr, shuffled_array = []):
 		arr.remove(rand_index)
 		# Recursive call
 		return shuffle_array(arr, shuffled_array)
+
+
+func display_fill_steps():
+	# Allow user to step through the filling of the SudokuBoard
+	# First clear the text being displayed in each cell
+	for cell in cells:
+		cell.text = ""
+	
+	# On the click of the next button, replay the filling of the cells
+	for foo in recursion_history:
+		yield(next_button, "pressed")
+		foo.cell.show_text(foo.value)
+	
+	# Finally, ensure that the cells are displaying the correct value
+	for cell in cells:
+		cell.display_value()

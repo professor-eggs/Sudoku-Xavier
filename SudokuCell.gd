@@ -101,3 +101,14 @@ func _on_LineEdit_focus_exited():
 func commit_text():
 	# This is called when the user clicks off a cell they have edited. It's not very functional at the moment
 	debugging = true
+
+
+func display_value():
+	if blank_cell:
+		text = ""
+	else:
+		text = str(value)
+
+
+func show_text(txt):
+	text = txt

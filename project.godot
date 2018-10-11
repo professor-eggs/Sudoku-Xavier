@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [display]
 
 window/dpi/allow_hidpi=true
+window/stretch/shrink="1"
 
 [rendering]
 
