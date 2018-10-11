@@ -43,13 +43,13 @@ func highlight(state):
 	$ColorRect.visible = state
 
 
-func _on_SudokuCell_mouse_entered():
+func _on_LineEdit_mouse_entered():
 	# Highlights neighbors on hover
 	for n in neighbors:
 		n.highlight(true)
 
 
-func _on_SudokuCell_mouse_exited():
+func _on_LineEdit_mouse_exited():
 	# Disables highlight
 	for n in neighbors:
 		n.highlight(false)

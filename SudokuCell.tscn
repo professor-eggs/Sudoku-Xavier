@@ -2,16 +2,14 @@
 
 [ext_resource path="res://SudokuCell.gd" type="Script" id=1]
 
-[node name="SudokuCell" type="Label" groups=[
+[node name="SudokuCell" type="Label" index="0" groups=[
 "SudokuCells",
 ]]
 
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 14.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -61,10 +59,10 @@ caret_blink_speed = 0.65
 caret_position = 0
 _sections_unfolded = [ "Visibility" ]
 
-[connection signal="mouse_entered" from="." to="." method="_on_SudokuCell_mouse_entered"]
-
-[connection signal="mouse_exited" from="." to="." method="_on_SudokuCell_mouse_exited"]
-
 [connection signal="focus_exited" from="LineEdit" to="." method="_on_LineEdit_focus_exited"]
+
+[connection signal="mouse_entered" from="LineEdit" to="." method="_on_LineEdit_mouse_entered"]
+
+[connection signal="mouse_exited" from="LineEdit" to="." method="_on_LineEdit_mouse_exited"]
 
 

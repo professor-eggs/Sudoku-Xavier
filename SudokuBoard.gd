@@ -50,7 +50,7 @@ func start():
 		print("failure")
 
 	# Show the user the steps of board filling
-	display_fill_steps()
+#	display_fill_steps()
 
 
 func initialise_cells():
